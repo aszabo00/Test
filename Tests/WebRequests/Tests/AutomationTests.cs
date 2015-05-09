@@ -20,7 +20,7 @@ namespace Test.Tests
 
         
         [Test]
-        public void Request()
+        public void RequestTest()
         {
             string demoKey = "Z8gg5MvWhSTvkWFA6ZL3JzG6UqHVOYvULj7iQnOd";
             string austinEvNetworks = "http://api.data.gov/nrel/alt-fuel-stations/v1/nearest.json?api_key={0}&location=Austin+TX&ev_network=ChargePoint%20Network".CustomFormat(demoKey);
