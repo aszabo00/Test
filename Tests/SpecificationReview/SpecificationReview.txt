@@ -1,0 +1,12 @@
+﻿Questions:
+1. If I'm in read state, can I log in(does clicking a homeaway confirm profile link/default password in email put me in write state)? Can I get there any other way?
+2. Will that first login put me in write state for all features or are some still read only for me?
+3. If I'm a user and a CSR do I have two sets of credentials(what if they're the same or my CSR credentials are the same as a differnt users), two dashboards post login, or one dashboard? How would I configure my own profile?
+4. Am I required to be in a specific dashboard to have certain write privileges?
+5. As a CSR how do I gain access and edit another user's profile?
+
+
+Important Questions:
+1/2-The user's path from read to write state will determine how that work is done and if earlier features need to be reworked. I'd like to know where the user makes that transition and what features it affects.
+3-How we are enabling a CSR's interaction with the system will deterimine the time/execution work involved in supporting CSR privilges. I'd like the response to be a rough map from CSR's pre to post login landing.  
+5-Dev needs to know how they are allowing a CSR to edit another user. It lets dev know if they have to build a peripheral app or supply api. I'd like a decision on how a CSR edits another user.

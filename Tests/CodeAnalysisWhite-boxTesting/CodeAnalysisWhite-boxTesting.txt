@@ -1,0 +1,42 @@
+﻿1. if (successfulMesages.isEmpty()) could be if (!successfulMesages.isEmpty()).
+
+2. If the recipient is the user, the condition if (currentUser.equals(recipient) || currentUser.getHasPermissionToModifyRecipients()) will always be true even if currentUser.getHasPermissionToModifyRecipients() = false. ‘currentUser.equals(recipient) ||’ could be removed from the condition.
+
+3. In the case where the user is not the recipient or does not have permission (currentUser.getHasPermissionToModifyRecipients() = false) to modify recipients the method always returns true. return true could be return false (since user doesn’t have permission to add we shouldn’t return true).
+
+
+The test doesn’t find the bugs because the user is also the recipient so regardless of whatever permissions the user has, the if condition in canRecieveMessage is always true. 
+
+
+Tests:
+1. Create a separate recipient so user != recipient and set user.setHasPermissionToModifyRecipients(false). Making that if condition fail, the method would return true even if Message.getAddRecipientAllowed would have returned false.
+
+User user = new User(“admin”);
+User recipient = new User(“nonAdmin”);
+user.setHasPermissionToModifyRecipients(false);
+Message goodMessage = new Message(“Test 1”);
+Message badMessage = new Message(“”Test 2);
+goodMessage.setAddRecipientAllowed(user, true);
+badMessage.setAddRecipientAllowed(recipient, false);
+ArrayList<Message> messages = new ArrayList<Message> ();
+messages.add(goodMessage);
+messages.add(badMessage);
+assertEquals(messages.size(), 2);
+ArrayList<Message> result = rec.addRecipientToAllMessages(messages, user, recipient);
+assertEquals(result.size(), 1);
+
+2. Keep the user and recipient the same, but set user.setHasPermissionToModifyRecipients(false). If you don’t have permissions, should you be allowed to getAddRecipientAllowed?
+
+User user = new User(“admin”);
+user.setHasPermissionToModifyRecipients(false);
+Message goodMessage = new Message(“Test 1”);
+Message badMessage = new Message(“”Test 2);
+goodMessage.setAddRecipientAllowed(user, true);
+badMessage.setAddRecipientAllowed(recipient, false);
+ArrayList<Message> messages = new ArrayList<Message> ();
+messages.add(goodMessage);
+messages.add(badMessage);
+assertEquals(messages.size(), 2);
+ArrayList<Message> result = rec.addRecipientToAllMessages(messages, user, user);
+assertEquals(result.size(), 1);
+
